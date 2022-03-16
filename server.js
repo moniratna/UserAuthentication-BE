@@ -20,11 +20,8 @@ let interval;
 
 const io = new Server(server, {
 	cors: {
-		origin: [
-			"http://localhost:3000",
-			"https://dashboard-3yapb1b0h-moniratna.vercel.app/dashboard",
-			"https://dashboard-3yapb1b0h-moniratna.vercel.app/",
-		],
+		origin: ["http://localhost:3000"],
+		methods: ["GET", "POST"],
 	},
 });
 
