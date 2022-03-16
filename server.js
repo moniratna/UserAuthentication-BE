@@ -19,11 +19,9 @@ const PORT = process.env.PORT || 5000;
 let interval;
 
 const io = new Server(server, {
-	cors: {
-		origin: "https://dashboard-3yapb1b0h-moniratna.vercel.app/",
-		methods: ["GET", "POST"],
-	},
+	transports: ["websocket", "polling", "flashsocket"],
 });
+
 io.on("connection", (socket) => {
 	console.log("New client connected");
 	if (interval) {
