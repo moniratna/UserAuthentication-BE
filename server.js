@@ -19,7 +19,13 @@ const PORT = process.env.PORT || 5000;
 let interval;
 
 const io = new Server(server, {
-	transports: ["websocket", "polling", "flashsocket"],
+	cors: {
+		origin: [
+			"http://localhost:3000",
+			"https://dashboard-3yapb1b0h-moniratna.vercel.app/dashboard",
+			"https://dashboard-3yapb1b0h-moniratna.vercel.app/",
+		],
+	},
 });
 
 io.on("connection", (socket) => {
