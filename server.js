@@ -6,30 +6,24 @@ const { Server } = require("socket.io");
 const http = require("http");
 const Currency = require("./models/Currency");
 const app = express();
-var server = app.listen(5000 || process.env.PORT);
-var io = require("socket.io")(server, {
-	cors: {
-		origin: "https://dashboard-3yapb1b0h-moniratna.vercel.app/",
-		methods: ["GET", "POST"],
-	},
-});
+
 // connect DB
 
 connectDB();
 app.use(express.json());
 app.use(cors());
-// const server = http.createServer(app);
+const server = http.createServer(app);
 
 const PORT = process.env.PORT || 5000;
 
 let interval;
 
-// const io = new Server(server, {
-// 	cors: {
-// 		origin: ["http://localhost:3000"],
-// 		methods: ["GET", "POST"],
-// 	},
-// });
+const io = new Server(server, {
+	cors: {
+		origin: "*",
+		methods: ["GET", "POST"],
+	},
+});
 
 io.on("connection", (socket) => {
 	console.log("New client connected");
@@ -58,4 +52,4 @@ app.get("/", (req, res) => {
 	res.send("API Running");
 });
 
-// server.listen(PORT, () => console.log(`server started on port ${PORT}`));
+server.listen(PORT, () => console.log(`server started on port ${PORT}`));
